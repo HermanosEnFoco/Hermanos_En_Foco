@@ -1,86 +1,84 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;500;600&display=swap');
+
 html {
   height: 100%;
   width: 100%;
 }
 
 h1 {
-  font-size: 8rem; /* Tamaño de letra grande en dispositivos grandes */
-  margin: 10px 0; /* Agregar espacio entre los h1 */
+  font-size: 100px;
+  margin: 10px 0;
   text-align: center;
-  color: #FFD800;
-  font-family: 'Patrick Hand', sans-serif;
+  color: #2C3E50; /* Azul oscuro más sofisticado */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  
 }
 
 /*BARRA DE NAVEGACION MENU*/
 .text-content {
-  height: 50px; /* Ajusta esta altura según tus necesidades */
+  height: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente el contenido */
-  align-items: center; /* Centra horizontalmente el contenido */
+  justify-content: center;
+  align-items: center;
 }
 
 .text-content p {
-  margin: 0; /* Elimina el margen predeterminado de los párrafos */
+  margin: 0;
   font-size: 1.3rem;
+  font-family: 'Lora', serif;
 }
 
 /* Estilo para los enlaces dentro de las columnas */
-    .row:hover .text-content {
-        background-color: rgba(255, 238, 71, 0.7); /* Cambia el fondo de la fila al pasar el mouse */
-        padding: 5px 5px 8px; /* Aumenta el padding inferior al pasar el mouse */
-    }
+.row:hover .text-content {
+    background-color: rgba(44, 62, 80, 0.1); /* Color más sutil al hover */
+    padding: 5px 5px 8px;
+}
 
-    /* Estilo para los enlaces dentro de las columnas */
-    .text-content a {
-        display: inline-block; /* Cambiamos a display inline-block para que funcione el pseudo-elemento ::after */
-        position: relative;
-        padding-bottom: 2px; /* Espacio para la línea debajo del texto */
-        text-decoration: none;
-        color: black;
-        font-family: 'Patrick Hand', sans-serif;
-        font-size: 25px;
-    }
+.text-content a {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+    text-decoration: none;
+    color: #34495E; /* Azul grisáceo para el texto */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}
 
-    /* Estilo para la animación de línea al pasar el mouse sobre el enlace */
-    .text-content a::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #0062B4;
-        transform: scaleX(0); /* Inicialmente, la línea tiene ancho cero */
-        transform-origin: left center;
-        transition: transform 0.3s ease-in-out;
-    }
+.text-content a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3498DB; /* Azul más vibrante para el subrayado */
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s ease-in-out;
+}
 
-    .text-content a:hover::after {
-        transform: scaleX(1); /* Aumenta el ancho de la línea al 100% al pasar el mouse */
-    }
+.text-content a:hover::after {
+    transform: scaleX(1);
+}
 
-    /* Estilo para el cambio de color de texto al pasar el mouse sobre el enlace */
-    .text-content a:hover {
-        color: #0062B4
-;
-    }
+.text-content a:hover {
+    color: #3498DB;
+}
 
-
-/* Estilos para los h1 en dispositivos pequeños (menos de 500px de ancho) */
+/* Media queries existentes */
 @media (max-width: 500px) {
   h1 {
-      font-size: 1.5rem; /* Reducir el tamaño de letra en dispositivos pequeños */
+      font-size: 1.5rem;
   }
   .text-content p{
     font-size: 0.9rem;
   }
   .text-content {
-  height: 70px; /* Ajusta esta altura según tus necesidades */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra verticalmente el contenido */
-  align-items: center; /* Centra horizontalmente el contenido */
+    height: 70px;
   }
   .titulo{
     font-size: 0.85rem;
@@ -98,7 +96,6 @@ header {
   justify-content: center;
   padding: 20px 0;
   height: 110vh;
-  /*background-color: darkblue;*/
 }
 
 #video-background {
@@ -108,42 +105,37 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1; /* Coloca el video detrás del contenido */
+  z-index: -1;
 }
 
 /* Estilos para los botones */
-button{
+button {
   display: inline-block;
-  border:none;
+  border: none;
   height: 50px;
   border-radius: 30px;
   padding: 10px 0;
   width: 200px;
-  background-color: #f5be09;
-  color: #3f3f3f;
-  font-weight:800;
+  background-color: #3498DB; /* Azul que combina con el esquema */
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   transition: 150ms;
-  margin-top:40px;
+  margin-top: 40px;
   font-size: 16px;
-  cursor: pointer;  
-  
-  }
-button:focus{
-  outline:none;
-}
-button:hover{
-  transform:translate(0, -5px);
-}
-/*Barra de navegacion*/
-section {
-  /*background-color: #F0C3A6;*/
-  opacity: 100%;
-  height:auto; /* Altura de la sección para ilustrar el efecto de desplazamiento */
+  cursor: pointer;
 }
 
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  transform: translate(0, -5px);
+  background-color: #2980B9; /* Un tono más oscuro al hover */
+}
 
 /*CARRUCEL DE FOTOS*/
-
 .contenedor {
   width: 90%;
   max-width: 1200px;
@@ -160,34 +152,31 @@ section {
   }
 }
 
-/* Estilo del carrusel */
-.carousel{
+.carousel {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
 }
 
- /* Estilo de las imágenes */
 .carousel img {
   width: 100%;
   height: auto;
   max-width: 100%;
 }
 
-/* Estilo del título y la descripción */
 .carousel .caption {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background-color: rgba(44, 62, 80, 0.7); /* Fondo más oscuro y elegante */
+  color: #ECF0F1; /* Texto más claro para mejor contraste */
   padding: 10px;
   transform: translateY(100%);
   transition: transform 0.5s;
+  font-family: 'Lora', serif;
 }
-    
-    /* Animación de aparición del título y la descripción */
+
 .carousel:hover .caption {
   transform: translateY(0);
 }
@@ -195,7 +184,6 @@ section {
 .carousel-caption {
   display: none;
 }
-
 
 /* FOOTER */
 .custom-container {
@@ -208,19 +196,15 @@ section.container {
   flex: 1;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-}
-
 footer {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: rgba(13, 95, 163, 0.7);
+  background-color: rgba(44, 62, 80, 0.9); /* Azul oscuro más elegante */
+  color: #ECF0F1; /* Texto claro para mejor contraste */
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
 }
 
@@ -240,7 +224,7 @@ footer {
   flex-grow: 2;
 }
 
-.right-section img{
+.right-section img {
   margin-right: 15px;
 }
 
