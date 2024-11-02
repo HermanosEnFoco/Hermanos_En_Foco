@@ -1,0 +1,250 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  font-size: 8rem; /* Tamaño de letra grande en dispositivos grandes */
+  margin: 10px 0; /* Agregar espacio entre los h1 */
+  text-align: center;
+  color: #FFD800;
+  font-family: 'Patrick Hand', sans-serif;
+}
+
+/*BARRA DE NAVEGACION MENU*/
+.text-content {
+  height: 50px; /* Ajusta esta altura según tus necesidades */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el contenido */
+  align-items: center; /* Centra horizontalmente el contenido */
+}
+
+.text-content p {
+  margin: 0; /* Elimina el margen predeterminado de los párrafos */
+  font-size: 1.3rem;
+}
+
+/* Estilo para los enlaces dentro de las columnas */
+    .row:hover .text-content {
+        background-color: rgba(255, 238, 71, 0.7); /* Cambia el fondo de la fila al pasar el mouse */
+        padding: 5px 5px 8px; /* Aumenta el padding inferior al pasar el mouse */
+    }
+
+    /* Estilo para los enlaces dentro de las columnas */
+    .text-content a {
+        display: inline-block; /* Cambiamos a display inline-block para que funcione el pseudo-elemento ::after */
+        position: relative;
+        padding-bottom: 2px; /* Espacio para la línea debajo del texto */
+        text-decoration: none;
+        color: black;
+        font-family: 'Patrick Hand', sans-serif;
+        font-size: 25px;
+    }
+
+    /* Estilo para la animación de línea al pasar el mouse sobre el enlace */
+    .text-content a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #0062B4;
+        transform: scaleX(0); /* Inicialmente, la línea tiene ancho cero */
+        transform-origin: left center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .text-content a:hover::after {
+        transform: scaleX(1); /* Aumenta el ancho de la línea al 100% al pasar el mouse */
+    }
+
+    /* Estilo para el cambio de color de texto al pasar el mouse sobre el enlace */
+    .text-content a:hover {
+        color: #0062B4
+;
+    }
+
+
+/* Estilos para los h1 en dispositivos pequeños (menos de 500px de ancho) */
+@media (max-width: 500px) {
+  h1 {
+      font-size: 1.5rem; /* Reducir el tamaño de letra en dispositivos pequeños */
+  }
+  .text-content p{
+    font-size: 0.9rem;
+  }
+  .text-content {
+  height: 70px; /* Ajusta esta altura según tus necesidades */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el contenido */
+  align-items: center; /* Centra horizontalmente el contenido */
+  }
+  .titulo{
+    font-size: 0.85rem;
+  }
+  .parrafo{
+    font-size: 0.65rem;
+  }
+}
+
+/* HEADER */
+header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  padding: 20px 0;
+  height: 110vh;
+  /*background-color: darkblue;*/
+}
+
+#video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Coloca el video detrás del contenido */
+}
+
+/* Estilos para los botones */
+button{
+  display: inline-block;
+  border:none;
+  height: 50px;
+  border-radius: 30px;
+  padding: 10px 0;
+  width: 200px;
+  background-color: #f5be09;
+  color: #3f3f3f;
+  font-weight:800;
+  transition: 150ms;
+  margin-top:40px;
+  font-size: 16px;
+  cursor: pointer;  
+  
+  }
+button:focus{
+  outline:none;
+}
+button:hover{
+  transform:translate(0, -5px);
+}
+/*Barra de navegacion*/
+section {
+  /*background-color: #F0C3A6;*/
+  opacity: 100%;
+  height:auto; /* Altura de la sección para ilustrar el efecto de desplazamiento */
+}
+
+
+/*CARRUCEL DE FOTOS*/
+
+.contenedor {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Estilo del carrusel */
+.carousel{
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+ /* Estilo de las imágenes */
+.carousel img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Estilo del título y la descripción */
+.carousel .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  transform: translateY(100%);
+  transition: transform 0.5s;
+}
+    
+    /* Animación de aparición del título y la descripción */
+.carousel:hover .caption {
+  transform: translateY(0);
+}
+
+.carousel-caption {
+  display: none;
+}
+
+
+/* FOOTER */
+.custom-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+section.container {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(13, 95, 163, 0.7);
+  font-size: 12px;
+}
+
+.left-section {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.middle-section {
+  text-align: center;
+  flex-grow: 0;
+  margin: 0 10px;
+}
+
+.right-section {
+  text-align: right;
+  flex-grow: 2;
+}
+
+.right-section img{
+  margin-right: 15px;
+}
+
+footer img {
+  width: 35px;
+  height: 35px;
+}
