@@ -12,8 +12,7 @@ h1 {
   text-align: center;
   color: #2C3E50; /* Azul oscuro más sofisticado */
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  
+  font-weight: 700; /* Peso por defecto para otras h1 */
 }
 
 /*BARRA DE NAVEGACION MENU*/
@@ -102,10 +101,10 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1; /* Mantener el video detrás del contenido */
+  object-fit: cover; /* Cubrir el área */
 }
 
 /* Estilos para los botones */
