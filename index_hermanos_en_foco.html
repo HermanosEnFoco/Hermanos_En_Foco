@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermanos En Foco</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Fotógrafos Mexicanos capturando momentos de la vida como conciertos, eventos familiares, instantes de la vida cotidiana.">
+  <meta name="keywords" content="Fotografía, Fotógrafos, sesión de fotos, portafolio de fotografía, álbum de fotos, fotos de famosos, fotos paisajes, fotos de modelos">
+  <meta name="author" content="Sebastian y Felipe Soriano Z.">
+
+  <link rel="shortcut icon" href="img/iconocamara.ico" type="image/x-icon">
+
+  <!-- Fuentes -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;500;600&display=swap">
+
+  <!-- Bootstrap (solo CSS — JS bundle incluido al final del body) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <style>
+    /* ── RESET / BASE ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── TIPOGRAFÍA ── */
+    h1 {
+      font-size: 100px;
+      margin: 10px 0;
+      text-align: center;
+      color: #2C3E50;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      padding: 20px 0;
+      height: 110vh;
+      overflow: hidden;
+    }
+
+    #video-background {
+      position: absolute;
+      top: 0; left: 0;
+      min-width: 100%; min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    /* ── BOTÓN ── */
+    button {
+      display: inline-block;
+      border: none;
+      height: 50px;
+      border-radius: 30px;
+      padding: 10px 0;
+      width: 200px;
+      background-color: #3498DB;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 40px;
+      transition: 150ms;
+    }
+    button:focus { outline: none; }
+    button:hover {
+      transform: translateY(-5px);
+      background-color: #2980B9;
+    }
+
+    /* ── BARRA DE NAVEGACIÓN STICKY ── */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .text-content {
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .text-content p { margin: 0; }
+
+    .row:hover .text-content {
+      background-color: rgba(44, 62, 80, 0.1);
+      padding: 5px 5px 8px;
+    }
+
+    .text-content a {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 2px;
+      text-decoration: none;
+      color: #34495E;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 25px;
+      font-weight: 600;
+    }
+    .text-content a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 2px;
+      background-color: #3498DB;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.3s ease-in-out;
+    }
+    .text-content a:hover::after { transform: scaleX(1); }
+    .text-content a:hover { color: #3498DB; }
+
+    /* ── GALERÍAS / CARRUSELES ── */
+    .contenedor {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .carousel {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Caption de hover */
+    .caption {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      background-color: rgba(44, 62, 80, 0.7);
+      color: #ECF0F1;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.5s;
+      font-family: 'Lora', serif;
+    }
+    .carousel:hover .caption { transform: translateY(0); }
+
+    /* Ocultar captions nativas de Bootstrap que no usamos */
+    .carousel-caption { display: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: rgba(44, 62, 80, 0.9);
+      color: #ECF0F1;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+    }
+
+    .left-section  { flex-grow: 1; margin-right: 10px; }
+    .middle-section { text-align: center; flex-grow: 0; margin: 0 10px; }
+    .right-section  { text-align: right; flex-grow: 2; }
+    .right-section img { margin-right: 15px; }
+    footer img { width: 35px; height: 35px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .contenedor { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      h1 { font-size: 1.5rem; }
+      .text-content { height: 70px; }
+      .text-content a { font-size: 0.9rem; }
+      .titulo  { font-size: 0.85rem; }
+      .parrafo { font-size: 0.65rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── ENCABEZADO ── -->
+  <header class="container-fluid">
+    <video autoplay muted loop playsinline id="video-background">
+      <source src="videos/fondoV.mp4" type="video/mp4">
+    </video>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 style="font-weight:900; font-size:50px;">¿Estás en Cuadro?</h1>
+        <h1 style="font-weight:900; font-size:50px;">Ahora, Encuentra tu Historia</h1>
+        <br>
+        <button onclick="scrollToSection()" type="button">Empezar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── BARRA DE NAVEGACIÓN ── -->
+  <section class="sticky-header" id="target-section">
+    <div class="row justify-content-center">
+      <div class="col text-content text-center">
+        <p><a href="index.html">Hermanos en Foco</a></p>
+      </div>
+      <div class="col text-content text-center">
+        <p><a href="quienes.html">Quiénes somos</a></p>
+      </div>
+      <div class="col text-content text-center">
+        <p><a href="blog.html">Blog</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALERÍA FILA 1 ── -->
+  <div class="contenedor">
+
+    <!-- Estudio -->
+    <a href="estudio.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/est1.png" alt="Estudio 1"></div>
+          <div class="carousel-item"><img src="img/est2.png" alt="Estudio 2"></div>
+          <div class="carousel-item"><img src="img/est3.png" alt="Estudio 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Estudio</h2>
+          <p>Retratos, moda, productos y escenas estáticas.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Eventos -->
+    <a href="eventos.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/eve2.png" alt="Eventos 1"></div>
+          <div class="carousel-item"><img src="img/eve1.jpg" alt="Eventos 2"></div>
+          <div class="carousel-item"><img src="img/eve3.jpg" alt="Eventos 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Eventos</h2>
+          <p>Artistas, conciertos, festivales y actuaciones en vivo.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Urbano -->
+    <a href="urbano.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/urb1.png" alt="Urbano 1"></div>
+          <div class="carousel-item"><img src="img/urb2.png" alt="Urbano 2"></div>
+          <div class="carousel-item"><img src="img/urb3.png" alt="Urbano 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Urbano</h2>
+          <p>Vida urbana, escenas espontáneas en las calles.</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── GALERÍA FILA 2 ── -->
+  <div class="contenedor">
+
+    <!-- Arquitectura -->
+    <a href="arquitectura.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/arq1.jpg" alt="Arquitectura 1"></div>
+          <div class="carousel-item"><img src="img/arq2.jpg" alt="Arquitectura 2"></div>
+          <div class="carousel-item"><img src="img/arq3.png" alt="Arquitectura 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Arquitectura</h2>
+          <p>Edificios, infraestructuras y detalles arquitectónicos.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Naturaleza -->
+    <a href="naturaleza.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/nat2.jpg" alt="Naturaleza 1"></div>
+          <div class="carousel-item"><img src="img/nat3.jpg" alt="Naturaleza 2"></div>
+          <div class="carousel-item"><img src="img/nat1.jpg" alt="Naturaleza 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Naturaleza</h2>
+          <p>Paisajes naturales, la flora y la fauna en su hábitat natural o artificial.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Extras -->
+    <a href="extras.html">
+      <div class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active"><img src="img/ext1.jpg" alt="Extras 1"></div>
+          <div class="carousel-item"><img src="img/ext2.jpg" alt="Extras 2"></div>
+          <div class="carousel-item"><img src="img/ext3.jpg" alt="Extras 3"></div>
+        </div>
+        <div class="caption">
+          <h2>Extras</h2>
+          <p>Tomas alternativas, ángulos diferentes y momentos capturados fuera de lo común.</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="left-section">
+      © 2023 Hermanos en Foco, Fotógrafos Mexicanos
+    </div>
+    <div class="middle-section">
+      <a href="index.html">
+        <img src="img/iconocamara.ico" alt="Inicio">
+      </a>
+    </div>
+    <div class="right-section">
+      <a href="https://www.facebook.com/profile.php?id=61550302913552" target="_blank" rel="noopener">
+        <img src="img/iconoface.ico" alt="Facebook">
+      </a>
+      <a href="https://instagram.com/hermanos_en_foco?igshid=MzNlNGNkZWQ4Mg==" target="_blank" rel="noopener">
+        <img src="img/iconoinstagram.ico" alt="Instagram">
+      </a>
+      <a href="https://www.tiktok.com/@sbt_s_z?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+        <img src="img/iconotiktok.ico" alt="TikTok">
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (al final para no bloquear render) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Script de navegación -->
+  <script>
+    function scrollToSection() {
+      document.getElementById('target-section').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
