@@ -1,113 +1,314 @@
-/* Importar fuentes de Google Fonts */
+/* ============================================================
+   FUENTES GLOBALES
+   - Títulos / navegación / botones: 'Montserrat', sans-serif
+   - Texto de cuerpo / captions:     'Lora', serif
+============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;500;600&display=swap');
 
+
+/* ============================================================
+   BASE
+   COLOR DE FONDO GENERAL — modificar aquí: background-color
+============================================================ */
 html {
   height: 100%;
   width: 100%;
+}
+
+body {
+  /* COLOR DE FONDO DE TODA LA PÁGINA — modificar aquí */
+  background-color: #14202E;
 }
 
 h1 {
   font-size: 100px;
   margin: 10px 0;
   text-align: center;
-  color: #2C3E50; /* Azul oscuro más sofisticado */
+  /* COLOR H1 global — modificar aquí */
+  color: #2C3E50; /* azul oscuro */
+  /* FUENTE H1 — modificar aquí */
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; /* Peso por defecto para otras h1 */
+  font-weight: 700;
 }
 
-/*BARRA DE NAVEGACION MENU*/
+
+/* ============================================================
+   INTRO ANIMADO
+   - El fondo es semitransparente para ver el carrusel hero
+     detrás mientras dura el intro.
+   - Logo (#intro-logo) más grande que el nombre (#intro-name).
+   - Al terminar la animación, el intro desaparece y se ve
+     el header normal.
+   COLORES/TAMAÑOS clave — modificar aquí:
+     · background del overlay:  rgba(0,0,0,0.55)
+     · blur del overlay:        4px
+     · ancho logo:              160px
+     · ancho nombre:            220px
+     · separación logo/nombre:  gap: 12px
+============================================================ */
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  /* FONDO SEMITRANSPARENTE para ver el carrusel detrás — modificar aquí */
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* SEPARACIÓN entre logo y nombre — modificar aquí */
+  gap: 12px;
+  animation: introFadeOut 0.9s ease-in-out 3.5s forwards;
+  pointer-events: none;
+}
+
+#intro-screen.done {
+  display: none;
+}
+
+/* LOGO — más grande que el nombre */
+#intro-logo {
+  /* TAMAÑO LOGO intro — modificar aquí */
+  width: 160px;
+  opacity: 0;
+  transform: scale(0.6);
+  animation: introPopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+}
+
+/* NOMBRE — más pequeño que el logo */
+#intro-name {
+  /* TAMAÑO NOMBRE intro — modificar aquí */
+  width: 220px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: introSlideUp 0.6s ease-out 1.1s forwards;
+}
+
+@keyframes introPopIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes introSlideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes introFadeOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+
+/* ============================================================
+   BARRA DE NAVEGACIÓN
+   - Fondo oscuro Charcoal con ancho completo.
+   - Contenido interior alineado al ancho de los carruseles
+     (90%, máx 1200px): marca a la izquierda, links a la derecha.
+   COLORES — modificar aquí:
+     · Fondo nav:        #14202E  (Charcoal oscuro)
+     · Enlace normal:    #ECF0F1  (blanco suave)
+     · Enlace hover:     #8BA9C3  (azul acero)
+     · Subrayado hover:  #8BA9C3
+   FUENTE — modificar aquí:
+     · 'Montserrat', sans-serif  |  font-weight 600
+     · font-size enlaces:  16px
+     · font-size marca:    16px  font-weight 700
+============================================================ */
+
+/* Contenedor interior alineado con los carruseles */
+.nav-inner {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+}
+
+/* Links del lado derecho */
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap; /* Se ajusta en pantallas pequeñas */
+}
+
+/* Nombre de la marca (izquierda) */
+.nav-brand a {
+  text-decoration: none;
+  /* COLOR marca — modificar aquí */
+  color: #ECF0F1;
+  /* FUENTE marca — modificar aquí */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav-brand a:hover {
+  /* COLOR marca hover — modificar aquí */
+  color: #8BA9C3;
+}
+
+/* Links de sección (derecha) */
+.nav-links a {
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  /* COLOR enlace — modificar aquí */
+  color: #ECF0F1;
+  /* FUENTE enlace — modificar aquí */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Subrayado animado en hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  /* COLOR subrayado — modificar aquí */
+  background-color: #8BA9C3;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-links a:hover {
+  /* COLOR enlace hover — modificar aquí */
+  color: #8BA9C3;
+}
+
+/* Compatibilidad: mantener .text-content para subpáginas que lo usen */
 .text-content {
   height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 12px;
 }
 
 .text-content p {
   margin: 0;
-  font-size: 1.3rem;
-  font-family: 'Lora', serif;
-}
-
-/* Estilo para los enlaces dentro de las columnas */
-.row:hover .text-content {
-    background-color: rgba(44, 62, 80, 0.1); /* Color más sutil al hover */
-    padding: 5px 5px 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
 }
 
 .text-content a {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 2px;
-    text-decoration: none;
-    color: #34495E; /* Azul grisáceo para el texto */
-    font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
-    font-weight: 600;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 2px;
+  text-decoration: none;
+  color: #ECF0F1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .text-content a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #3498DB; /* Azul más vibrante para el subrayado */
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.3s ease-in-out;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #8BA9C3;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease-in-out;
 }
 
 .text-content a:hover::after {
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .text-content a:hover {
-    color: #3498DB;
+  color: #8BA9C3;
 }
 
-/* Media queries existentes */
-@media (max-width: 500px) {
-  h1 {
-      font-size: 1.5rem;
-  }
-  .text-content p{
-    font-size: 0.9rem;
-  }
-  .text-content {
-    height: 70px;
-  }
-  .titulo{
-    font-size: 0.85rem;
-  }
-  .parrafo{
-    font-size: 0.65rem;
-  }
-}
 
-/* HEADER */
+/* ============================================================
+   HEADER / HERO
+   Ocupa 100vh — responsivo con clamp() en los h1 del HTML
+============================================================ */
 header {
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  padding: 20px 0;
-  height: 110vh;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-#video-background {
+
+/* ============================================================
+   CARRUSEL HERO (fondo animado)
+   Efecto autofocus: blur 12px → 0px simulando cámara enfocando
+   OVERLAY — modificar aquí: background de .hero-overlay
+============================================================ */
+#hero-carousel {
   position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1; /* Mantener el video detrás del contenido */
-  object-fit: cover; /* Cubrir el área */
+  inset: 0;
+  z-index: 0;
 }
 
-/* Estilos para los botones */
+#hero-carousel .hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  filter: blur(12px);
+  transition: filter 1.2s ease, opacity 0.8s ease;
+}
+
+#hero-carousel .hero-slide.active {
+  opacity: 1;
+  filter: blur(12px);
+  animation: cameraFocus 3s ease-out forwards;
+}
+
+/* Animación autofocus de cámara */
+@keyframes cameraFocus {
+  0%   { filter: blur(12px); }
+  40%  { filter: blur(6px);  }
+  65%  { filter: blur(1px);  }
+  80%  { filter: blur(3px);  }
+  100% { filter: blur(0px);  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* OSCURIDAD overlay del hero — modificar aquí */
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+header .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ============================================================
+   BOTONES
+   COLOR fondo:  #8BA9C3  — modificar aquí
+   COLOR hover:  #14202E  — modificar aquí
+   FUENTE:       'Montserrat', sans-serif
+============================================================ */
 button {
   display: inline-block;
   border: none;
@@ -115,8 +316,10 @@ button {
   border-radius: 30px;
   padding: 10px 0;
   width: 200px;
-  background-color: #3498DB; /* Azul que combina con el esquema */
-  color: white;
+  /* COLOR botón — modificar aquí */
+  background-color: #8BA9C3;
+  color: #ffffff;
+  /* FUENTE botón — modificar aquí */
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   transition: 150ms;
@@ -131,10 +334,23 @@ button:focus {
 
 button:hover {
   transform: translate(0, -5px);
-  background-color: #2980B9; /* Un tono más oscuro al hover */
+  /* COLOR botón hover — modificar aquí */
+  background-color: #14202E;
 }
 
-/*CARRUCEL DE FOTOS*/
+
+/* ============================================================
+   GALERÍA / CARRUSEL DE FOTOS
+   Grid 3 columnas escritorio → 1 columna móvil
+   En móvil los carruseles son más pequeños (max-width: 320px)
+   Caption: fondo rgba(43,66,87,0.7) — modificar aquí
+   Texto caption: #ECF0F1 — modificar aquí
+   FUENTE caption: 'Lora', serif
+   
+   ANIMACIÓN TÁCTIL:
+   En dispositivos táctiles, .carousel.touched activa el caption
+   igual que el hover en escritorio.
+============================================================ */
 .contenedor {
   width: 90%;
   max-width: 1200px;
@@ -143,12 +359,6 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-}
-
-@media (max-width: 768px) {
-  .contenedor {
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
 
 .carousel {
@@ -168,15 +378,24 @@ button:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(44, 62, 80, 0.7); /* Fondo más oscuro y elegante */
-  color: #ECF0F1; /* Texto más claro para mejor contraste */
+  /* COLOR fondo caption — modificar aquí */
+  background-color: rgba(43, 66, 87, 0.7);
+  /* COLOR texto caption — modificar aquí */
+  color: #ECF0F1;
   padding: 10px;
   transform: translateY(100%);
   transition: transform 0.5s;
+  /* FUENTE caption — modificar aquí */
   font-family: 'Lora', serif;
 }
 
+/* Hover en escritorio */
 .carousel:hover .caption {
+  transform: translateY(0);
+}
+
+/* Toque en dispositivos táctiles — activado por JS añadiendo clase .touched */
+.carousel.touched .caption {
   transform: translateY(0);
 }
 
@@ -184,7 +403,13 @@ button:hover {
   display: none;
 }
 
-/* FOOTER */
+
+/* ============================================================
+   FOOTER
+   Sin fondo — solo logo centrado
+   TAMAÑO logo: 40px  — modificar aquí
+   OPACIDAD:    0.55  — modificar aquí (0=invisible, 1=completo)
+============================================================ */
 .custom-container {
   display: flex;
   flex-direction: column;
@@ -198,36 +423,93 @@ section.container {
 footer {
   margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
-  background-color: rgba(44, 62, 80, 0.9); /* Azul oscuro más elegante */
-  color: #ECF0F1; /* Texto claro para mejor contraste */
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  padding: 20px 10px;
+  /* FONDO footer — actualmente transparente, modificar aquí */
+  background: transparent;
 }
 
-.left-section {
-  flex-grow: 1;
-  margin-right: 10px;
+footer img.footer-logo {
+  /* TAMAÑO logo footer — modificar aquí */
+  width: 40px;
+  height: 40px;
+  /* OPACIDAD logo footer — modificar aquí (0 = invisible, 1 = completo) */
+  opacity: 0.55;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  object-fit: contain;
 }
 
-.middle-section {
-  text-align: center;
-  flex-grow: 0;
-  margin: 0 10px;
+footer img.footer-logo:hover {
+  opacity: 1;
+  transform: scale(1.08);
 }
 
-.right-section {
-  text-align: right;
-  flex-grow: 2;
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  /* Los carruseles pasan a 1 columna y se hacen más compactos */
+  .contenedor {
+    grid-template-columns: repeat(1, 1fr);
+    /* En móvil centramos y limitamos el ancho para que se vean más pequeños */
+    width: 70%;
+    gap: 24px;
+  }
+
+  .text-content a {
+    font-size: 14px;
+  }
+
+  .nav-inner {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 0;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-brand a,
+  .nav-links a {
+    font-size: 13px;
+  }
 }
 
-.right-section img {
-  margin-right: 15px;
-}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem;
+  }
 
-footer img {
-  width: 35px;
-  height: 35px;
+  .text-content p {
+    font-size: 0.9rem;
+  }
+
+  .text-content {
+    height: 70px;
+  }
+
+  .titulo {
+    font-size: 0.85rem;
+  }
+
+  .parrafo {
+    font-size: 0.65rem;
+  }
+
+  /* TAMAÑOS intro en móvil — modificar aquí */
+  #intro-logo {
+    width: 100px;
+  }
+
+  #intro-name {
+    width: 160px;
+  }
+
+  /* Carruseles aún más compactos en teléfonos pequeños */
+  .contenedor {
+    width: 80%;
+  }
 }
